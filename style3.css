@@ -1,0 +1,382 @@
+* {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #764ba2, #764ba2);
+    color: #fff;
+  }
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #764ba2, #764ba2);
+    color: #fff;
+  }
+  
+  #app {
+    display: flex;
+    flex-direction: row;
+    max-width: 960px;
+    margin: 2rem auto;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+
+  #loginScreen {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #loginScreen h2 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  input[type="text"], input[type="password"] {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+  }
+  
+  button {
+    background: #ffd700;
+    color: #333;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.6);
+    user-select: none;
+  }
+  button:hover, button:focus {
+    background: #ffec70;
+    outline: none;
+  }
+  
+  .error {
+    background: #ff4c4c;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    user-select: none;
+  }
+  
+  #dashboard {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  #dashboard header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #dashboard header h2 {
+    font-weight: 600;
+    margin: 0;
+  }
+  #logoutBtn {
+    background: #ff4c4c;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(255, 76, 76, 0.6);
+  }
+  #logoutBtn:hover, #logoutBtn:focus {
+    background: #ff6161;
+    outline: none;
+  }
+  
+  #noiseSection {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  #meter {
+    width: 100%;
+    height: 30px;
+    border-radius: 15px;
+    background: #333;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px #000;
+    margin: 1rem 0 0.5rem;
+  }
+  #level {
+    height: 100%;
+    width: 0%;
+    background: #ffd700;
+    border-radius: 15px 0 0 15px;
+    transition: width 0.1s ease-out, background 0.3s ease;
+    box-shadow: 0 0 15px #ffd700;
+  }
+  #status {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    filter: drop-shadow(0 0 1px black);
+    user-select: none;
+    min-height: 28px;
+  }
+  #toggleBtn {
+    display: block;
+    margin: 1rem auto 0;
+  }
+  
+  #historySection {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+  }
+  #historySection h3 {
+    margin-top: 0;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+    user-select: none;
+  }
+  .history-item {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding: 0.3rem 0;
+  }
+  
+  #profileSection {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+  }
+  #profileSection h3 {
+    margin-top: 0;
+    font-weight: 600;
+    user-select: none;
+  }
+  #exportSection, #thresholdSection {
+    background: rgba(255,255,255,0.1);
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+#chartSection { 
+    background: whitesmoke;
+    color: #333;
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}  
+  #exportSection .btn {
+    margin-right: 10px;
+    padding: 8px 16px;
+    text-decoration: none;
+    background: #4CAF50;
+    color: white;
+    border-radius: 4px;
+  }
+
+ 
+
+  
+  #dashboard {
+    flex: 2;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h2 {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  #logoutBtn {
+    background: #ff4c4c;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(255, 76, 76, 0.6);
+    cursor: pointer;
+    border: none;
+  }
+
+  .sidebar {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+  }
+
+  .sidebar section {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 1rem;
+    color: #fff;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px 5px 0 0;
+    text-decoration: none;
+    background: #4CAF50;
+    color: white;
+    border-radius: 4px;
+  }
+
+  #meter {
+    width: 100%;
+    height: 30px;
+    border-radius: 15px;
+    background: #333;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px #000;
+    margin: 1rem 0 0.5rem;
+  }
+
+  #level {
+    height: 100%;
+    width: 0%;
+    background: #ffd700;
+    border-radius: 15px 0 0 15px;
+    transition: width 0.1s ease-out, background 0.3s ease;
+    box-shadow: 0 0 15px #ffd700;
+  }
+
+  #status {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    user-select: none;
+  }
+
+  #toggleBtn {
+    display: block;
+    margin: 1rem auto 0;
+  }
+
+  #historySection, #profileSection, #noiseSection {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+  }
+
+  #historyLog {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+
+  .history-item {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding: 0.3rem 0;
+  }
+
+  #chartSection canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin: 0.5rem 0;
+    border-radius: 6px;
+    border: none;
+  }
+
+  form button {
+    width: 100%;
+  }
+
+
+  /* === Mobile Friendly Styling === */
+@media screen and (max-width: 768px) {
+  #app {
+    flex-direction: column;
+  }
+
+  #dashboard {
+    width: 100%;
+    padding: 15px;
+  }
+
+  aside.sidebar {
+    width: 100%;
+    padding: 15px;
+    order: 2;
+  }
+
+  #noiseSection button,
+  #thresholdSection button,
+  .btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  #status {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  section {
+    margin-bottom: 25px;
+  }
+
+  #level {
+    height: 20px;
+  }
+
+  #meter {
+    height: 20px;
+  }
+
+  #profileSection p,
+  #thresholdSection p {
+    font-size: 14px;
+  }
+}

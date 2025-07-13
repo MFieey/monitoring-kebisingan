@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+    }
+
+    #app {
+      max-width: 500px;
+      margin: 3rem auto;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      min-height: 400px;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #ffd700;
+      color: #333;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255, 215, 0, 0.6);
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    button:hover, button:focus {
+      background: #ffec70;
+      outline: none;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .link a {
+      color: #ffd700;
+      text-decoration: none;
+    }
+
+    .error {
+      background: #ff4c4c;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <h2>Registrasi Pengguna</h2>
+    <form method="POST" action="register.php">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="password" name="confirm_password" placeholder="Konfirmasi Password" required />
+      <input type="text" name="role" placeholder="Role (admin/user)" required />
+
+      <button type="submit">Daftar</button>
+    </form>
+    <div class="link">
+      Sudah punya akun? <a href="login.html">Login di sini</a>
+    </div>
+  </div>
+
+</body>
+</html>

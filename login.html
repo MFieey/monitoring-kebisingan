@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Sistem Kebisingan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+    }
+
+    #app {
+      max-width: 500px;
+      margin: 3rem auto;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      min-height: 400px;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #ffd700;
+      color: #333;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255, 215, 0, 0.6);
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    button:hover, button:focus {
+      background: #ffec70;
+      outline: none;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .link a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .error {
+      background: #ff4c4c;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <h2>Login Sistem</h2>
+    <input type="text" id="usernameInput" placeholder="Username" autocomplete="username" />
+    <input type="password" id="passwordInput" placeholder="Password" autocomplete="current-password" />
+    <button id="loginBtn">Masuk</button>
+
+    <div class="link">
+      Belum punya akun? <a href="register.html">Daftar di sini</a>
+    </div>
+
+    <div id="loginError" class="error"></div>
+  </div>
+
+  <script>
+    document.getElementById("loginBtn").addEventListener("click", function () {
+      const username = document.getElementById("usernameInput").value;
+      const password = document.getElementById("passwordInput").value;
+
+      fetch('login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = data.user.role === 'admin' ? 'admin_dashboard.php' : 'index.html';
+        } else {
+          showError(data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Login error:', error);
+        showError("Gagal menghubungi server.");
+      });
+    });
+
+    function showError(msg) {
+      const err = document.getElementById("loginError");
+      err.textContent = msg;
+      err.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>

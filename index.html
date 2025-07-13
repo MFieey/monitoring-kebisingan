@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Sistem Pendeteksi Kebisingan</title>
+  <link rel="stylesheet" href="style3.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+   
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="dashboard">
+      <header>
+        <h2>Dashboard</h2>
+        <button id="logoutBtn">Keluar</button>
+      </header>
+
+      <section id="profileSection">
+        <h3>Profil Pengguna</h3>
+        <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+        <p><strong>Jenis Akun:</strong> <span id="profileRole"></span></p>
+      </section>
+
+      <section id="noiseSection">
+        <h3>Pendeteksi Kebisingan</h3>
+        <div id="meter"><div id="level"></div></div>
+        <div id="status">Klik "Mulai" untuk mengaktifkan pendeteksi kebisingan</div>
+        <button id="toggleBtn">Mulai</button>
+      </section>
+
+      <section id="historySection">
+        <h3>Riwayat Level Kebisingan (5 terakhir)</h3>
+        <div id="historyLog"></div>
+      </section>
+    </div>
+
+    <aside class="sidebar">
+      <section id="chartSection">
+        <h3>Grafik Kebisingan</h3>
+        <canvas id="noiseChart" width="250" height="180"></canvas>
+      </section>
+
+      <section id="exportSection" style="display:none">
+        <h3>Export Data</h3>
+        <a href="export_csv.php" class="btn">Export ke CSV</a>
+        <a href="export_pdf.php" class="btn">Export ke PDF</a>
+      </section>      
+
+      <section id="thresholdSection">
+        <h3>Pengaturan Ambang Batas</h3>
+        <form method="POST" action="update_threshold.php">
+          <label for="threshold">Ambang Batas (dB):</label>
+          <input type="number" id="threshold" name="threshold" min="0" max="150" required />
+          <button type="submit">Simpan</button>
+          <p id="thresholdMessage" style="margin-top:10px; font-weight:600;"></p>
+        </form>
+      </section>
+    </aside>
+  </div>
+
+  
+  <script src="script5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    fetch("session_check.php")
+      .then(res => res.json())
+      .then(data => {
+        if (!data.logged_in) {
+          window.location.href = "login.html";
+        } else {
+          document.getElementById("dashboard").style.display = "flex";
+          document.getElementById("profileUsername").textContent = data.username;
+          document.getElementById("profileRole").textContent = data.role;
+        }
+      });
+
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+      fetch("logout.php").then(() => window.location.href = "login.html");
+    });
+
+    const ctx = document.getElementById('noiseChart').getContext('2d');
+    const noiseChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+        datasets: [{
+          label: 'Kebisingan (dB)',
+          data: [68, 72, 70, 74, 69, 73, 71],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: true, text: 'Grafik Kebisingan Mingguan' }
+        }
+      }
+    });
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch("update_threshold.php", {
+        method: "POST",
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          const msg = document.getElementById("thresholdMessage");
+          msg.textContent = data.message;
+          msg.style.color = data.success ? "lightgreen" : "red";
+        });
+    });
+    
+    // Di dalam DOMContentLoaded
+if (data.role === 'admin') {
+  window.location.href = "dashboard_admin.php";
+}
+
+  </script>
+</body>
+</html>
